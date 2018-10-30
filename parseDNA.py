@@ -25,13 +25,14 @@ class parseDNA:
 
 	def split_into_chunkgroups(self, chunkSize, numberChunks, indexPosition, data):
 		# returns a tuple of the group of Chunks and the target
-		j=0;
-		return [ data[j:j+chunkSize] for j in range(indexPosition, chunkSize*numberChunks+indexPosition, chunkSize) ], data[j+chunkSize]
+		j=0
+		return [ data[j:j+chunkSize] for j in range(indexPosition, chunkSize*numberChunks+indexPosition, chunkSize) ], data[indexPosition+chunkSize*numberChunks]
 
 	def list_chunkgroups(self, chunkSize, numberChunks, data):
 		# loops through each character calling split_into_chunksgroups
 		# stays within the index bounds
 		# returns a list of groups of Chunks and the target
+		i=0
 		return [ self.split_into_chunkgroups(chunkSize, numberChunks, i, data) for i in range(len(data)-(chunkSize*numberChunks+2)) ]
 
 	def formatPrintAll(self):
