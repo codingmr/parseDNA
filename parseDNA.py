@@ -21,29 +21,30 @@ class parseDNA:
 				self.numberChunks = int(args[2])
 				self.fileName = args[3]
 			except IndexError as error:
-				print "Expected: chunkSize numberChunks fileName"
+				print("Expected: chunkSize numberChunks fileName")
 
 	def split_into_chunkgroups(self, chunkSize, numberChunks, indexPosition, data):
 		# returns a tuple of the group of Chunks and the target
-	    return [ data[j:j+chunkSize] for j in xrange(indexPosition, chunkSize*numberChunks+indexPosition, chunkSize) ], data[j+chunkSize]
+		j=0;
+		return [ data[j:j+chunkSize] for j in range(indexPosition, chunkSize*numberChunks+indexPosition, chunkSize) ], data[j+chunkSize]
 
 	def list_chunkgroups(self, chunkSize, numberChunks, data):
 		# loops through each character calling split_into_chunksgroups
 		# stays within the index bounds
 		# returns a list of groups of Chunks and the target
-		return [ self.split_into_chunkgroups(chunkSize, numberChunks, i, data) for i in xrange(len(data)-(chunkSize*numberChunks+2)) ]
+		return [ self.split_into_chunkgroups(chunkSize, numberChunks, i, data) for i in range(len(data)-(chunkSize*numberChunks+2)) ]
 
 	def formatPrintAll(self):
-		print '\n'.join('{}: {}'.format(*k) for k in enumerate(self.lst))
+		print('\n'.join('{}: {}'.format(*k) for k in enumerate(self.lst)))
 
 	def formatPrintOne(self, index):
 		toString = ""
 
-		for i in xrange(len(self.lst[1][0])):
+		for i in range(len(self.lst[1][0])):
 			toString += "v" + str(i) + "=" + str(self.lst[1][0][i]) + " "
 		toString += "with target == " + str(self.lst[1][1])
 
-		print toString
+		print(toString)
 
 	def parseFile(self):
 		with open(self.fileName) as file:
